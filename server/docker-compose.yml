@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: posts-db
+    image: postgres
+    hostname: localhost
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: postit
+      POSTGRES_DB: postable
+    restart: unless-stopped
