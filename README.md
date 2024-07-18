@@ -30,6 +30,7 @@ Server:
 # Assumptions
 
 - that the user has Docker Desktop, docker installed, or can install docker
+- as this is a small project and test, and only one person is working on it (me), commits are being pushed straight to main rather than branching for each change to reduce unneccessary overhead
 
 # Design Decisions
 
