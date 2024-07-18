@@ -20,4 +20,7 @@ Built with:
 
 # Available scripts
 
+Server:
+"npm run start" -> compiles TS files to JS and runs application with nodemon watching for changes to files and restarting server when required
+
 # Assumptions or design decisions made
