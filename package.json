@@ -2,8 +2,9 @@
   "name": "full-stack-js-example-18072024",
   "version": "1.0.0",
   "description": "# Project overview An example application for managing posts. Built with:  - ReactJS - GraphQL - Apollo - NodeJS - PostgreSQL - TypeORM",
-  "main": "server/app.js",
+  "main": "server/src/index.js",
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "typescript": "^5.5.3"
   },
   "scripts": {
