@@ -9,7 +9,7 @@ Built with:
 - NodeJS
 - PostgreSQL
 - TypeORM
-- 
+  
 # Setup instructions
 1. Clone the repo
 2. Install project dependencies with "pnpm i" @ root directory
