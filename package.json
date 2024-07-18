@@ -1,0 +1,22 @@
+{
+  "name": "full-stack-js-example-18072024",
+  "version": "1.0.0",
+  "description": "# Project overview An example application for managing posts. Built with:  - ReactJS - GraphQL - Apollo - NodeJS - PostgreSQL - TypeORM",
+  "main": "server/app.js",
+  "devDependencies": {
+    "typescript": "^5.5.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/king-koda/full-stack-js-example-18072024.git"
+  },
+  "author": "king-koda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/king-koda/full-stack-js-example-18072024/issues"
+  },
+  "homepage": "https://github.com/king-koda/full-stack-js-example-18072024#readme"
+}

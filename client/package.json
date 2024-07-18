@@ -1,0 +1,19 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/king-koda/full-stack-js-example-18072024.git"
+  },
+  "author": "king-koda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/king-koda/full-stack-js-example-18072024/issues"
+  },
+  "homepage": "https://github.com/king-koda/full-stack-js-example-18072024#readme"
+}

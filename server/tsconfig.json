@@ -1,0 +1,17 @@
+{
+  "display": "Node 18",
+  "_version": "18.2.0",
+
+  "compilerOptions": {
+    "lib": ["es2023"],
+    "module": "node16",
+    "target": "es2022",
+
+    "esModuleInterop": true,
+    "moduleResolution": "node16",
+
+    /* TypeORM */
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  }
+}
