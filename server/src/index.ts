@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { Post } from './entity/Post';
 import { AppDataSource } from './data-source';
-const express = require('express');
+import express from 'express';
 
 // TODO: move to config file
 const port = 3000;
@@ -10,7 +10,7 @@ const app = express();
 
 if (!AppDataSource.isInitialized) {
   AppDataSource.initialize()
-    .then(async () => {})
+    .then()
     .catch((error) => console.log(error));
 }
 

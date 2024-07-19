@@ -12,6 +12,8 @@
 
     /* TypeORM */
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+
+    "noEmit": true
   }
 }

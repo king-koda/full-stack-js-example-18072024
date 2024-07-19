@@ -8,7 +8,7 @@
     "typescript": "^5.5.3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run --prefix ./server start"
   },
   "repository": {
     "type": "git",
