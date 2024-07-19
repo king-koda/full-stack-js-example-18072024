@@ -31,8 +31,12 @@ Server:
 
 - that the user has Docker Desktop, docker installed, or can install docker
 - as this is a small project and test, and only one person is working on it (me), commits are being pushed straight to main rather than branching for each change to reduce unneccessary overhead
+- that new data is to be seeded to the application on every initial launch
+- that the user would like to also create posts alongside the already generated data
+- that new posts created would appear at the start of the list of posts naturally
 
 # Design Decisions
 
-- expressJS framework for the web server as there was no criteria to use any particular web framework, and as the application is so simple, a minimal setup will suffice
 - docker to reduce the manual setup required for users running the application locally, allowing the DB to be setup with one simple command
+- migrated from ts-node to tsx due to technical issues, which were immediately resolved when using tsx instead
+- emitting the compiled JS files alongside the ts files or in their own dist folder felt unneccessary for the project, so noEmit was enabled in tsconfig.json

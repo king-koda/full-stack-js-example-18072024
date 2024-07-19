@@ -4,3 +4,7 @@ type Post {
   content: String
   order: Int
 }
+
+type Query {
+  posts: [Post]
+}

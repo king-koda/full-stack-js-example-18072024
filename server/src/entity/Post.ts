@@ -1,16 +1,16 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Post {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: "varchar" })
   title: string;
 
-  @Column()
+  @Column({ type: "text" })
   content: string;
 
-  @Column()
+  @Column({ type: "int" })
   order: number;
 }

@@ -1,32 +1,21 @@
-import 'reflect-metadata';
-import { Post } from './entity/Post';
-import { AppDataSource } from './data-source';
-import express from 'express';
+import "reflect-metadata";
+import { initializeDataSource } from "./data-source";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import { ApolloServer } from "@apollo/server";
+import fs from "fs";
+import path from "path";
+import resolvers from "./resolver/index";
 
-// TODO: move to config file
-const port = 3000;
+const __dirname = path.resolve();
+const typeDefs = `${fs.readFileSync(__dirname + "/src/schema.graphql")}`;
 
-const app = express();
+await initializeDataSource();
 
-if (!AppDataSource.isInitialized) {
-  AppDataSource.initialize()
-    .then()
-    .catch((error) => console.log(error));
-}
-
-app.get('/post', async (req, res) => {
-  const post = new Post();
-
-  post.title = 'My first post';
-  post.content = 'Hello world!';
-  post.order = 1;
-
-  const repo = AppDataSource.getRepository(Post);
-  await repo.save(post);
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
 });
 
-app.get('/', (req, res) => {
-  console.log('Hiya!');
+await startStandaloneServer(server, {
+  listen: { port: 4000 },
 });
-
-app.listen(port);
