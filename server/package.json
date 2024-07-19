@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "concurrently \"tsc -w\" \"npx tsx src/index.ts\"",
-    "db-setup": "docker-compose up -d"
+    "db-setup": "docker-compose up -d && npx tsx test/seed-data.ts"
   },
   "repository": {
     "type": "git",

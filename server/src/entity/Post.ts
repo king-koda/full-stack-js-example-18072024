@@ -11,6 +11,6 @@ export class Post {
   @Column({ type: "text" })
   content: string;
 
-  @Column({ type: "int" })
+  @Column({ type: "int", default: 0 })
   order: number;
 }

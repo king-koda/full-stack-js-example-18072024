@@ -6,6 +6,7 @@ import fs from "fs";
 import path from "path";
 import resolvers from "./resolver/index";
 
+// TODO: move to separate file
 const __dirname = path.resolve();
 const typeDefs = `${fs.readFileSync(__dirname + "/src/schema.graphql")}`;
 

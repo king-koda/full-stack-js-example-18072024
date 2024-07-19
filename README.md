@@ -25,7 +25,7 @@ Built with:
 Server:
 
 - "npm run start" -> compiles TS files to JS and runs application with nodemon watching for changes to files and restarting server when required
-- "npm run db-setup" -> pulls the latest postgres image from docker site and initializes it with the config found @ server/docker-compose.yml
+- "npm run db-setup" -> pulls the latest postgres image from docker site and initializes it with the config found @ server/docker-compose.yml, and then populates the db with some fake seed data
 
 # Assumptions
 
@@ -34,6 +34,7 @@ Server:
 - that new data is to be seeded to the application on every initial launch
 - that the user would like to also create posts alongside the already generated data
 - that new posts created would appear at the start of the list of posts naturally
+- that the ordering of posts is purely on the client side (TBD)
 
 # Design Decisions
 
