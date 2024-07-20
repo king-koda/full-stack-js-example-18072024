@@ -1,18 +1,18 @@
+import { faker } from "@faker-js/faker";
 import { getDataSource } from "../src/data-source";
 import { Post } from "../src/entity/Post";
 
 const ds = await getDataSource();
 
-// TODO: implement faker for the title and content of the posts, create ~300 posts
 try {
-  // TODO: run in a transaction
-  ///
-  await ds.getRepository(Post).save({ content: "Habba", title: "Wa" });
-  await ds.getRepository(Post).save({ content: "Habba", title: "Ba" });
-  await ds.getRepository(Post).save({ content: "Habba", title: "Ha" });
-  await ds.getRepository(Post).save({ content: "Habba", title: "Haaaaaaaa" });
-  console.info("Seed data created.");
-  ///
+  await ds.transaction(async (manager) => {
+    for (let i = 0; i < 300; i++) {
+      await manager
+        .getRepository(Post)
+        .save({ content: faker.word.words(8), title: faker.word.words(2) });
+    }
+    console.info("Seed data created.");
+  });
 } catch (error) {
   console.info("Error creating seed data.");
 }
