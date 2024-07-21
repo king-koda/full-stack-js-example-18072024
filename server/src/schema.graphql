@@ -7,5 +7,10 @@ type Post {
 }
 
 type Query {
-  posts: [Post]
+  getPosts: [Post]
+}
+
+type Mutation {
+  updatePostOrder(firstPostId: ID!, secondPostId: ID!): Boolean
+  updatePost(id: ID!, title: String!, content: String!): ID
 }

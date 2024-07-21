@@ -1,8 +1,13 @@
-import { getPosts } from "../service/post.service";
+import { ApolloServerOptionsWithTypeDefs } from "@apollo/server";
+import { getPosts, updatePost, updatePostOrder } from "../service/post.service";
 
 export const postResolvers = {
   Query: {
-    posts: getPosts,
+    getPosts: getPosts,
+  },
+  Mutation: {
+    updatePost: (_, args) => updatePost(args),
+    updatePostOrder: (_, args) => updatePostOrder(args),
   },
 };
 
