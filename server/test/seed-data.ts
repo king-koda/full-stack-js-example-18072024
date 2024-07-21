@@ -7,20 +7,18 @@ const ds = await getDataSource();
 
 try {
   await ds.transaction(async (manager) => {
-    let seedPosts: Omit<Post, "id">[] = [];
-    for (let i = 0; i < 400; i++) {
-      const newDate = faker.date.recent({ days: 30, refDate: new Date() });
-      seedPosts.push({
+    let newDate = new Date("2022-05-12");
+
+    for (let i = 1; i <= 400; i++) {
+      await manager.getRepository(Post).save({
         content: faker.word.words(8),
         title: faker.word.words(2),
         createdAt: newDate.toString(),
       });
+
+      newDate = faker.date.soon({ days: 2, refDate: newDate });
     }
 
-    // creating all the seed data and sorting by createdAt before persisting is to prevent the primary keys being out of order
-    seedPosts = _.sortBy(seedPosts, (post) => post.createdAt);
-
-    await manager.getRepository(Post).save(seedPosts);
     console.info("Seed data created.");
   });
 } catch (error) {
