@@ -8,6 +8,7 @@ import resolvers from "./resolver/index";
 
 // TODO: move to separate file
 const __dirname = path.resolve();
+// read graphql schema from file into a string
 const typeDefs = `${fs.readFileSync(__dirname + "/src/schema.graphql")}`;
 
 await initializeDataSource();

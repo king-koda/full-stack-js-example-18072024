@@ -1,8 +1,11 @@
 import { getDataSource } from "../data-source";
 import { Post } from "../entity/Post";
 
+/** Query for fetching all available posts */
+// TODO: add necessary code/args for pagination/ infinite scrolling
 export const getPosts = async () => {
   const dataSource = await getDataSource();
+  // Fetch all posts in ascending order to allow their positions to be swapped and updated easily
   const posts = await dataSource
     .getRepository(Post)
     .find({ order: { order: "ASC" } });
@@ -10,6 +13,12 @@ export const getPosts = async () => {
   return posts;
 };
 
+/** Mutation for updating the title and content of a given post.
+ * @param args.id - The ID of the post to update.
+ * @param args.title - The new title of the post.
+ * @param args.content - The new content of the post.
+ * @returns The updated post if successful.
+ */
 export const updatePost = async (args: {
   id: number;
   title: string;
@@ -35,6 +44,11 @@ export const updatePost = async (args: {
   }
 };
 
+/** Mutation for swapping the order of two given posts.
+ * @param firstPostId - The ID of the first post of the swap.
+ * @param secondPostId - The ID of the second post of the swap.
+ * @returns True if successful.
+ */
 export const updatePostOrder = async (args: {
   firstPostId: number;
   secondPostId: number;

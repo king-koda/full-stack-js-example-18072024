@@ -15,6 +15,7 @@ const AppDataSource = new DataSource({
   migrations: [],
 });
 
+/** Initializes the data source so that its ready to receive operations from the application */
 export const initializeDataSource = async () => {
   if (!AppDataSource.isInitialized) {
     try {
@@ -27,7 +28,7 @@ export const initializeDataSource = async () => {
     }
   }
 };
-
+/** Initializes and returns the required data source for accessing the DB */
 export const getDataSource = async () => {
   await initializeDataSource();
   return AppDataSource;
