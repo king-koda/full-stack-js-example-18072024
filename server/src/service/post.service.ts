@@ -3,7 +3,9 @@ import { Post } from "../entity/Post";
 
 export const getPosts = async () => {
   const dataSource = await getDataSource();
-  const posts = await dataSource.getRepository(Post).find();
+  const posts = await dataSource
+    .getRepository(Post)
+    .find({ order: { order: "ASC" } });
   console.info(`Fetched ${posts.length} posts.`);
   return posts;
 };
