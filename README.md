@@ -34,7 +34,7 @@ Server:
 - that new data is to be seeded to the application on every initial launch
 - that the user would like to also create posts alongside the already generated data
 - that new posts created would appear at the start of the list of posts naturally
-- that the ordering of posts is purely on the client side
+- that the ordering of posts is persisted on the server side and visible on the client side
 
 # Design Decisions
 
