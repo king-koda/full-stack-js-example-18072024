@@ -22,9 +22,8 @@ export const initializeDataSource = async () => {
       console.info("Data source initialized.");
       return;
     } catch (error) {
-      const errorMsg = "Unable to initialize data source.";
-      console.error(errorMsg);
-      throw new Error(errorMsg);
+      console.error("Unable to initialize data source.");
+      throw error;
     }
   }
 };
