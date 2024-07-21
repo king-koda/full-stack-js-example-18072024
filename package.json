@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/king-koda/full-stack-js-example-18072024/issues"
   },
-  "homepage": "https://github.com/king-koda/full-stack-js-example-18072024#readme"
+  "homepage": "https://github.com/king-koda/full-stack-js-example-18072024#readme",
+  "dependencies": {
+    "@types/lodash": "^4.17.7",
+    "lodash": "^4.17.21"
+  }
 }
