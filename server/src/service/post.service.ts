@@ -17,12 +17,22 @@ export const updatePost = async (args: {
 }) => {
   const { id, title, content } = args;
   const dataSource = await getDataSource();
-  let post = await dataSource.getRepository(Post).findOne({ where: { id } });
-  post.title = title;
-  post.content = content;
-  post = await dataSource.getRepository(Post).save(post);
-  console.info(`Updated post with ID: ${post.id}.`);
-  return post;
+
+  try {
+    let post = await dataSource
+      .getRepository(Post)
+      .findOneOrFail({ where: { id } });
+
+    post.title = title;
+    post.content = content;
+
+    post = await dataSource.getRepository(Post).save(post);
+    console.info(`Updated post with ID: ${post.id}.`);
+    return post;
+  } catch (error) {
+    console.error(`Failed to update post with ID: ${id}`);
+    throw error;
+  }
 };
 
 export const updatePostOrder = async (args: {
@@ -31,22 +41,28 @@ export const updatePostOrder = async (args: {
 }) => {
   const { firstPostId, secondPostId } = args;
   const dataSource = await getDataSource();
-  const firstPostDB = await dataSource
-    .getRepository(Post)
-    .findOne({ where: { id: firstPostId } });
-  const secondPostDB = await dataSource
-    .getRepository(Post)
-    .findOne({ where: { id: secondPostId } });
 
-  const placeholderOrder = structuredClone(firstPostDB.order);
-  firstPostDB.order = secondPostDB.order;
-  secondPostDB.order = placeholderOrder;
+  try {
+    const firstPostDB = await dataSource
+      .getRepository(Post)
+      .findOneOrFail({ where: { id: firstPostId } });
+    const secondPostDB = await dataSource
+      .getRepository(Post)
+      .findOneOrFail({ where: { id: secondPostId } });
 
-  await dataSource.getRepository(Post).save([firstPostDB, secondPostDB]);
+    const placeholderOrder = structuredClone(firstPostDB.order);
+    firstPostDB.order = secondPostDB.order;
+    secondPostDB.order = placeholderOrder;
 
-  console.info(
-    `Swapped the ordering of posts of ID: ${firstPostId} and ${secondPostId}.`
-  );
-
-  // TODO: decide whether to return a boolean or not as described in the schema
+    await dataSource.getRepository(Post).save([firstPostDB, secondPostDB]);
+    console.info(
+      `Swapped the ordering of posts of ID: ${firstPostId} and ${secondPostId}.`
+    );
+    return true;
+  } catch (error) {
+    console.error(
+      `Failed to swap the ordering of posts of ID: ${firstPostId} and ${secondPostId}.`
+    );
+    throw error;
+  }
 };
