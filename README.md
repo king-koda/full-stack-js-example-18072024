@@ -26,6 +26,7 @@ Server:
 
 - "npm run start" -> compiles TS files to JS and runs application with nodemon watching for changes to files and restarting server when required
 - "npm run db-setup" -> pulls the latest postgres image from docker site and initializes it with the config found @ server/docker-compose.yml, and then populates the db with some fake seed data
+- "npm run test" -> runs all the test files in the directory using vitest, and re-runs the tests on any new changes
 
 # Assumptions
 
