@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "concurrently \"tsc -w\" \"npx tsx src/index.ts\"",
-    "db-setup": "docker-compose up -d && npx tsx test/seed-data.ts"
+    "db-setup": "docker-compose up -d && npx tsx test/seed-data.ts",
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
-    "@types/node": "^20.14.11"
+    "@types/node": "^20.14.11",
+    "vitest": "^2.0.3"
   }
 }
