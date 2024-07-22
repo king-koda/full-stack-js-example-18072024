@@ -27,6 +27,7 @@ export const Post = ({ id, title, content, createdAt }: PostProps) => {
       id={"post-" + id}
       sx={{
         height: "100%",
+        backgroundColor: "lightblue",
       }}
     >
       <CardHeader

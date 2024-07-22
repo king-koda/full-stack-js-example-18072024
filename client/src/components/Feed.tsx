@@ -1,7 +1,7 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery, useSubscription } from "@apollo/client";
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import { GET_POSTS } from "./graphql/post";
+import { GET_POSTS, UPDATE_POST_ORDER } from "./graphql/post";
 import { Post } from "./Post";
 
 type Post = {
@@ -13,13 +13,30 @@ type Post = {
 };
 
 export const Feed = () => {
-  const result = useQuery(GET_POSTS);
+  const {
+    loading: isGetPostsLoading,
+    error: getPostsError,
+    data: getPostsResult,
+    refetch,
+  } = useQuery(GET_POSTS);
 
-  const [posts, setPosts] = useState<Post[]>(result?.data ?? []);
+  const [posts, setPosts] = useState<Post[]>(getPostsResult?.data ?? []);
 
   useEffect(() => {
-    setPosts(result?.data?.getPosts);
-  }, [result?.data?.getPosts]);
+    setPosts(getPostsResult?.getPosts);
+  }, [getPostsResult?.getPosts]);
+
+  const [dragStartId, setDragStartId] = useState<number | null>(null);
+  const [dragStopId, setDragStopId] = useState<number | null>(null);
+
+  const [
+    updatePostOrder,
+    {
+      data: updatePostOrderResult,
+      loading: isUpdatePostOrderLoading,
+      error: updatePostOrderError,
+    },
+  ] = useMutation(UPDATE_POST_ORDER);
 
   return (
     <>
@@ -45,7 +62,26 @@ export const Feed = () => {
                 pl: "0 !important",
                 pt: "0 !important",
                 m: 2,
+                cursor: "move",
               }}
+              onDragStart={(e) => {
+                setDragStartId(post.id);
+              }}
+              onDragOver={(e) => {
+                setDragStopId(post.id);
+              }}
+              onDragEnd={async (e) => {
+                if (dragStartId !== dragStopId) {
+                  await updatePostOrder({
+                    variables: {
+                      firstPostId: dragStartId,
+                      secondPostId: dragStopId,
+                    },
+                  });
+                  await refetch();
+                }
+              }}
+              draggable={true}
               id={"grid-item-" + post.id}
               key={post.id}
             >
