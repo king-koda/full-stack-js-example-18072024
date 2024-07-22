@@ -6,7 +6,7 @@
   "description": "Client side of the full stack js example",
   "scripts": {
     "dev": "vite",
-    "start": "concurrently \"tsc -w\" \"vite src/\"",
+    "start": "concurrently \"tsc -w\" \"vite\"",
     "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
