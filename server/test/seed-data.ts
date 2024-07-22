@@ -12,7 +12,7 @@ try {
     // and creation dates incrementing by 0 - 2 days each time from a reference date
     for (let i = 1; i <= 400; i++) {
       await manager.getRepository(Post).save({
-        title: faker.lorem.words({ min: 2, max: 5 }),
+        title: faker.lorem.words({ min: 1, max: 3 }),
         content: faker.lorem.paragraph(5),
         createdAt: newDate,
       });
