@@ -4,7 +4,6 @@
 
   "compilerOptions": {
     "lib": ["es2023"],
-    "module": "ESNext",
     "target": "es2022",
 
     "esModuleInterop": true,
@@ -13,8 +12,6 @@
     /* TypeORM */
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-
-    "noEmit": true,
 
     "types": ["node"]
   }

@@ -5,6 +5,8 @@
 
   "compilerOptions": {
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noEmit": true,
+    "module": "ESNext"
   }
 }
