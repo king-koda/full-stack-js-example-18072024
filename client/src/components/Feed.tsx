@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useSubscription } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { GET_POSTS, UPDATE_POST_ORDER } from "./graphql/post";
@@ -64,22 +64,25 @@ export const Feed = () => {
                 m: 2,
                 cursor: "move",
               }}
+              onDragEnter={(e) => {
+                e.preventDefault();
+              }}
               onDragStart={(e) => {
                 setDragStartId(post.id);
               }}
               onDragOver={(e) => {
+                e.preventDefault();
                 setDragStopId(post.id);
               }}
-              onDragEnd={async (e) => {
-                if (dragStartId !== dragStopId) {
-                  await updatePostOrder({
-                    variables: {
-                      firstPostId: dragStartId,
-                      secondPostId: dragStopId,
-                    },
-                  });
-                  await refetch();
-                }
+              onDrop={async (e) => {
+                e.preventDefault();
+                await updatePostOrder({
+                  variables: {
+                    firstPostId: dragStartId,
+                    secondPostId: dragStopId,
+                  },
+                });
+                await refetch();
               }}
               draggable={true}
               id={"grid-item-" + post.id}
