@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Server side of the full stack js example",
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
@@ -26,10 +26,14 @@
     "pg": "^8.12.0",
     "reflect-metadata": "^0.2.2",
     "tsx": "^4.16.2",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.20",
+    "@types/lodash": "^4.17.7",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/node": "^20.14.11",
-    "vitest": "^2.0.3"
+    "vitest": "^2.0.3",
+    "concurrently": "^8.2.2",
+    "typescript": "^5.5.3"
   }
 }

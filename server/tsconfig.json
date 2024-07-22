@@ -1,4 +1,5 @@
 {
+  "extends": "../tsconfig.json",
   "display": "Node 18",
   "_version": "18.2.0",
 
@@ -13,6 +14,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
 
-    "types": ["node"]
+    "types": ["node"],
+    "strictPropertyInitialization": false
   }
 }

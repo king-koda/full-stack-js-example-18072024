@@ -1,10 +1,10 @@
 {
+  "extends": "../tsconfig.json",
   "name": "client",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Client side of the full stack js example",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently \"tsc -w\" \"vite src/\""
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/king-koda/full-stack-js-example-18072024/issues"
   },
-  "homepage": "https://github.com/king-koda/full-stack-js-example-18072024#readme"
+  "homepage": "https://github.com/king-koda/full-stack-js-example-18072024#readme",
+  "dependencies": {
+    "@types/lodash": "^4.17.7",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "vite": "^5.3.4",
+    "concurrently": "^8.2.2",
+    "typescript": "^5.5.3"
+  }
 }
