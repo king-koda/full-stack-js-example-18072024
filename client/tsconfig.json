@@ -1,4 +1,5 @@
 {
+  "extends": "../tsconfig.json",
   "display": "Vite React",
   "_version": "3.0.0",
 
