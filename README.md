@@ -42,3 +42,5 @@ Server:
 - docker to reduce the manual setup required for users running the application locally, allowing the DB to be setup with one simple command
 - migrated from ts-node to tsx due to technical issues, which were immediately resolved when using tsx instead
 - emitting the compiled JS files alongside the ts files or in their own dist folder felt unneccessary for the project, so noEmit was enabled in tsconfig.json
+- used React DnD for post drag and drop reordering, as its a popular and very functional library, which will help achieve the re-ordering by dragging posts around easily
+- chose Vite React over CRA for speed and minimalism, as its only a small project CRA might be overkill, used the create vite@latest command to get the groundwork done
