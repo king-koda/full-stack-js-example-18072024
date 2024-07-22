@@ -34,8 +34,12 @@ export const Post = ({ id, title, content, createdAt }: PostProps) => {
         sx={{
           height: "20%",
           padding: 0,
+          overflow: "clip",
         }}
-        titleTypographyProps={{ variant: "h5", fontWeight: "bold" }}
+        titleTypographyProps={{
+          variant: "h5",
+          fontWeight: "bold",
+        }}
         title={title}
       />
       <Divider />
@@ -46,6 +50,7 @@ export const Post = ({ id, title, content, createdAt }: PostProps) => {
           padding: "16px",
           boxSizing: "border-box",
           height: "70%",
+          overflowX: "auto",
         }}
       >
         <Typography variant="body1" component="div">

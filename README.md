@@ -36,6 +36,7 @@ Server:
 - that the user would like to also create posts alongside the already generated data
 - that new posts created would appear at the start of the list of posts naturally
 - that the ordering of posts is persisted on the server side and visible on the client side
+- that the title of the post being clipped and prevented in overflowing isn't a huge issue to the user
 
 # Design Decisions
 
