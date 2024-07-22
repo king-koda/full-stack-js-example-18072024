@@ -1,13 +1,19 @@
-import { ApolloServerOptionsWithTypeDefs } from "@apollo/server";
-import { getPosts, updatePost, updatePostOrder } from "../service/post.service";
+import {
+  UpdatePostArgs,
+  UpdatePostOrderArgs,
+  getPosts,
+  updatePost,
+  updatePostOrder,
+} from "../service/post.service";
 
 export const postResolvers = {
   Query: {
     getPosts: getPosts,
   },
   Mutation: {
-    updatePost: (_, args) => updatePost(args),
-    updatePostOrder: (_, args) => updatePostOrder(args),
+    updatePost: (parent: undefined, args: UpdatePostArgs) => updatePost(args),
+    updatePostOrder: (parent: undefined, args: UpdatePostOrderArgs) =>
+      updatePostOrder(args),
   },
 };
 

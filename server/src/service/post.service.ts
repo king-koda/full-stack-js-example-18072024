@@ -13,17 +13,19 @@ export const getPosts = async () => {
   return posts;
 };
 
+export type UpdatePostArgs = {
+  id: number;
+  title: string;
+  content: string;
+};
+
 /** Mutation for updating the title and content of a given post.
  * @param args.id - The ID of the post to update.
  * @param args.title - The new title of the post.
  * @param args.content - The new content of the post.
  * @returns The updated post if successful.
  */
-export const updatePost = async (args: {
-  id: number;
-  title: string;
-  content: string;
-}) => {
+export const updatePost = async (args: UpdatePostArgs) => {
   const { id, title, content } = args;
   const dataSource = await getDataSource();
 
@@ -44,15 +46,17 @@ export const updatePost = async (args: {
   }
 };
 
+export type UpdatePostOrderArgs = {
+  firstPostId: number;
+  secondPostId: number;
+};
+
 /** Mutation for swapping the order of two given posts.
  * @param firstPostId - The ID of the first post of the swap.
  * @param secondPostId - The ID of the second post of the swap.
  * @returns True if successful.
  */
-export const updatePostOrder = async (args: {
-  firstPostId: number;
-  secondPostId: number;
-}) => {
+export const updatePostOrder = async (args: UpdatePostOrderArgs) => {
   const { firstPostId, secondPostId } = args;
   const dataSource = await getDataSource();
 
