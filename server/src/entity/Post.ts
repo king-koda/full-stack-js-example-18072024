@@ -15,6 +15,6 @@ export class Post {
   @Generated("increment")
   order: number;
 
-  @Column({ type: "timestamp with time zone" })
-  createdAt: string;
+  @Column({ type: "timestamptz" })
+  createdAt: Date;
 }

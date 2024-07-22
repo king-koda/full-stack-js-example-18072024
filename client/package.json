@@ -12,6 +12,11 @@
   },
   "dependencies": {
     "@apollo/client": "^3.10.8",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@fontsource/roboto": "^5.0.13",
+    "@mui/icons-material": "^5.16.4",
+    "@mui/material": "^5.16.4",
     "@types/lodash": "^4.17.7",
     "graphql": "^16.9.0",
     "lodash": "^4.17.21",

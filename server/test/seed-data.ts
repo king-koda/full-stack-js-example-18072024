@@ -1,7 +1,6 @@
-import { faker } from "@faker-js/faker";
+import { faker } from "@faker-js/faker/locale/en_AU";
 import { getDataSource } from "../src/data-source";
 import { Post } from "../src/entity/Post";
-import _ from "lodash";
 
 const ds = await getDataSource();
 
@@ -13,9 +12,9 @@ try {
     // and creation dates incrementing by 0 - 2 days each time from a reference date
     for (let i = 1; i <= 400; i++) {
       await manager.getRepository(Post).save({
-        content: faker.word.words(8),
-        title: faker.word.words(2),
-        createdAt: newDate.toString(),
+        title: faker.lorem.words({ min: 2, max: 5 }),
+        content: faker.lorem.paragraph(5),
+        createdAt: newDate,
       });
 
       // increment 0-2 days since previous iterations date
