@@ -6,27 +6,31 @@ import { PostType } from "../types";
 import { GET_POSTS, UPDATE_POST_ORDER } from "./graphql/post";
 import { Post } from "./Post";
 
-const POST_LIMIT = 20;
+const POST_LIMIT = 30;
 
 export const Feed = () => {
   const {
-    loading: isGetPostsLoading,
-    error: getPostsError,
     data: getPostsResult,
+    refetch,
     fetchMore,
-  } = useQuery(GET_POSTS, { variables: { cursor: 0, limit: POST_LIMIT } });
+  } = useQuery(GET_POSTS, {
+    variables: { cursor: 0, limit: POST_LIMIT },
+  });
 
   const [posts, setPosts] = useState<PostType[]>([]);
 
   const [dragStartId, setDragStartId] = useState<number | null>(null);
-  const [dragStopId, setDragStopId] = useState<number | null>(null);
 
-  const [updatePostOrder, { loading: isUpdatePostOrderLoading }] =
-    useMutation(UPDATE_POST_ORDER);
+  const [updatePostOrder] = useMutation(UPDATE_POST_ORDER);
 
   useEffect(() => {
     setPosts(getPostsResult?.getPosts);
   }, [getPostsResult?.getPosts]);
+
+  const [isSwapping, setIsSwapping] = useState<{
+    firstPostId: number;
+    secondPostId: number;
+  } | null>(null);
 
   return (
     <>
@@ -39,6 +43,7 @@ export const Feed = () => {
           mt: "0 !important",
           ml: "0 !important",
         }}
+        key="grid-container"
       >
         {posts?.length > 0 &&
           posts.map((post: PostType, index: number) => (
@@ -52,37 +57,56 @@ export const Feed = () => {
                 pl: "0 !important",
                 pt: "0 !important",
                 m: 2,
-                cursor: "move",
+                cursor: isSwapping ? "wait" : "move",
               }}
               onDragEnter={(e) => {
+                // removes the "not allowed" cursor when dragging cursor over a post
                 e.preventDefault();
               }}
-              onDragStart={(e) => {
+              onDragStart={() => {
                 setDragStartId(post.id);
               }}
               onDragOver={(e) => {
+                // removes the "not allowed" cursor when dragging a post
                 e.preventDefault();
-                setDragStopId(post.id);
               }}
-              onDrop={async (e) => {
-                e.preventDefault();
+              onDrop={async () => {
+                // if the first post to swap is not set, return
+                if (!dragStartId) return;
+                // prevent sending a graphql request if the start and stop id is the same
+                if (dragStartId === post.id) return;
+
+                setIsSwapping({
+                  firstPostId: dragStartId,
+                  secondPostId: post.id,
+                });
+
                 await updatePostOrder({
                   variables: {
                     firstPostId: dragStartId,
-                    secondPostId: dragStopId,
+                    secondPostId: post.id,
                   },
                 });
+
+                // refetch the exact amount of posts that are currently loaded, to eliminate jitter and smoothen out the drag and drop feature
+                await refetch({
+                  cursor: 0,
+                  limit: posts.length,
+                });
+
+                setIsSwapping(null);
               }}
               draggable={true}
               id={"grid-item-" + post.id}
-              key={post.id}
             >
-              {/* set a waypoint at every 20th post */}
-              {(index + 1) % POST_LIMIT === 0 && (
+              {/* set a waypoint at every POST_LIMIT/2 post */}
+              {(index + 1) % (POST_LIMIT / 2) === 0 && (
                 <Waypoint
+                  key={"waypoint-" + post.id}
                   onEnter={async () => {
                     // only fetch more if we are at the end of the list
-                    if (index + 1 !== posts.length) return;
+                    if (index + 1 !== posts.length - POST_LIMIT / 2) return;
+
                     await fetchMore({
                       // fetch more posts using the id of the last post in the list as the offset
                       variables: {
@@ -111,11 +135,11 @@ export const Feed = () => {
                 />
               )}
               <Post
-                key={post.id}
                 id={post.id}
                 title={post.title}
                 content={post.content}
                 createdAt={post.createdAt}
+                isSwapping={isSwapping}
               />
             </Grid>
           ))}
