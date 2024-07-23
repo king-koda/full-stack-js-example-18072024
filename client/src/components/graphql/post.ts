@@ -29,3 +29,12 @@ export const UPDATE_POST_ORDER = gql`
     updatePostOrder(firstPostId: $firstPostId, secondPostId: $secondPostId)
   }
 `;
+
+export const POSTS_REORDERED = gql`
+  subscription PostsReordered {
+    postsReordered {
+      firstPostId
+      secondPostId
+    }
+  }
+`;
