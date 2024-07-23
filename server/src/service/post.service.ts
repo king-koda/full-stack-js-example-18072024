@@ -1,5 +1,6 @@
 import { getDataSource } from "../data-source";
 import { Post } from "../entity/Post";
+import { getPubSub } from "../pub-sub";
 
 /** Query for fetching all available posts */
 // TODO: add necessary code/args for pagination/ infinite scrolling
@@ -59,6 +60,7 @@ export type UpdatePostOrderArgs = {
 export const updatePostOrder = async (args: UpdatePostOrderArgs) => {
   const { firstPostId, secondPostId } = args;
   const dataSource = await getDataSource();
+  const pubsub = getPubSub();
 
   try {
     const firstPostDB = await dataSource
@@ -73,6 +75,7 @@ export const updatePostOrder = async (args: UpdatePostOrderArgs) => {
     secondPostDB.order = placeholderOrder;
 
     await dataSource.getRepository(Post).save([firstPostDB, secondPostDB]);
+    pubsub.publish("POSTS_REORDERED", { postsReordered: args });
     console.info(
       `Swapped the ordering of posts of ID: ${firstPostId} and ${secondPostId}.`
     );

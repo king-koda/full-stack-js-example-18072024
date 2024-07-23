@@ -6,6 +6,11 @@ type Post {
   createdAt: String!
 }
 
+type ReorderedPosts {
+  firstPostId: ID!
+  secondPostId: ID!
+}
+
 type Query {
   getPosts: [Post]
 }
@@ -13,4 +18,8 @@ type Query {
 type Mutation {
   updatePostOrder(firstPostId: ID!, secondPostId: ID!): Boolean
   updatePost(id: ID!, title: String!, content: String!): Post
+}
+
+type Subscription {
+  postsReordered: ReorderedPosts
 }
