@@ -16,7 +16,9 @@ export const getPosts = async (args: GetPostArgs) => {
   const posts = await dataSource
     .getRepository(Post)
     .find({ order: { order: "ASC" }, skip: cursor ?? 0, take: limit });
-  console.info(`Fetched ${posts.length} posts.`);
+  console.info(
+    `Fetched posts from ${cursor ?? 0} to ${posts[posts.length - 1]?.id}.`
+  );
   return posts;
 };
 

@@ -1,42 +1,32 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Waypoint } from "react-waypoint";
+import { PostType } from "../types";
 import { GET_POSTS, UPDATE_POST_ORDER } from "./graphql/post";
 import { Post } from "./Post";
 
-type Post = {
-  id: number;
-  title: string;
-  content: string;
-  order: number;
-  createdAt: string;
-};
+const POST_LIMIT = 20;
 
 export const Feed = () => {
   const {
     loading: isGetPostsLoading,
     error: getPostsError,
     data: getPostsResult,
-    refetch,
-  } = useQuery(GET_POSTS);
+    fetchMore,
+  } = useQuery(GET_POSTS, { variables: { cursor: 0, limit: POST_LIMIT } });
 
-  const [posts, setPosts] = useState<Post[]>(getPostsResult?.data ?? []);
-
-  useEffect(() => {
-    setPosts(getPostsResult?.getPosts);
-  }, [getPostsResult?.getPosts]);
+  const [posts, setPosts] = useState<PostType[]>([]);
 
   const [dragStartId, setDragStartId] = useState<number | null>(null);
   const [dragStopId, setDragStopId] = useState<number | null>(null);
 
-  const [
-    updatePostOrder,
-    {
-      data: updatePostOrderResult,
-      loading: isUpdatePostOrderLoading,
-      error: updatePostOrderError,
-    },
-  ] = useMutation(UPDATE_POST_ORDER);
+  const [updatePostOrder, { loading: isUpdatePostOrderLoading }] =
+    useMutation(UPDATE_POST_ORDER);
+
+  useEffect(() => {
+    setPosts(getPostsResult?.getPosts);
+  }, [getPostsResult?.getPosts]);
 
   return (
     <>
@@ -51,7 +41,7 @@ export const Feed = () => {
         }}
       >
         {posts?.length > 0 &&
-          posts.map((post) => (
+          posts.map((post: PostType, index: number) => (
             <Grid
               item
               sx={{
@@ -82,12 +72,44 @@ export const Feed = () => {
                     secondPostId: dragStopId,
                   },
                 });
-                await refetch();
               }}
               draggable={true}
               id={"grid-item-" + post.id}
               key={post.id}
             >
+              {/* set a waypoint at every 20th post */}
+              {(index + 1) % POST_LIMIT === 0 && (
+                <Waypoint
+                  onEnter={async () => {
+                    // only fetch more if we are at the end of the list
+                    if (index + 1 !== posts.length) return;
+                    await fetchMore({
+                      // fetch more posts using the id of the last post in the list as the offset
+                      variables: {
+                        cursor: Number(posts[posts.length - 1].id),
+                        limit: POST_LIMIT,
+                      },
+                      updateQuery: (prev, { fetchMoreResult }) => {
+                        // if there are no more posts to fetch, return the current list
+                        if (!fetchMoreResult) return prev;
+
+                        // merge the current list with the new list
+                        return {
+                          getPosts: [
+                            ...prev.getPosts,
+                            ...fetchMoreResult.getPosts,
+                          ],
+                        };
+                      },
+                    }).catch((error) => {
+                      console.error(
+                        "ApolloError during fetchMore:",
+                        error.message
+                      );
+                    });
+                  }}
+                />
+              )}
               <Post
                 key={post.id}
                 id={post.id}
