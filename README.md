@@ -1,4 +1,4 @@
-# full-stack-js-example-18072024
+# Full Stack JS Example
 
 # Project overview
 
@@ -43,6 +43,8 @@ Server:
 - docker to reduce the manual setup required for users running the application locally, allowing the DB to be setup with one simple command
 - migrated from ts-node to tsx due to technical issues, which were immediately resolved when using tsx instead
 - emitting the compiled JS files alongside the ts files or in their own dist folder felt unneccessary for the project, so noEmit was enabled in tsconfig.json
-- used React DnD for post drag and drop reordering, as its a popular and very functional library, which will help achieve the re-ordering by dragging posts around easily
+- used a fairly primitive drag and drop solution for the posts, without use of an external library, decided on this as I was able to get the functionality I wanted, it looked nice enough in my opinion, and it gave me more control over how I wanted the application to behave
 - chose Vite React over CRA for speed and minimalism, as its only a small project CRA might be overkill, used the create vite@latest command to get the groundwork done
 - using react-waypoint for handling the tracking of elements in the list to know when its time to refetch more posts to allow infinite scrolling, chose it because its a wrapper that is clean and simple to use
+- decided to continue using pubsub although it isn't recommended in production environments, due to this being a relatively small project, and it isn't expected to be used by many people at once very often
+- paginated application using apollo's recommended tools approach
