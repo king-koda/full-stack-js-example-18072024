@@ -4,8 +4,8 @@ import {
   Card,
   CardContent,
   CardHeader,
+  CircularProgress,
   Divider,
-  Skeleton,
   Stack,
   Typography,
 } from "@mui/material";
@@ -42,9 +42,9 @@ export const Post = ({
       }}
     >
       {isBeingSwapped && (
-        <>
-          <Skeleton variant="rounded" width={400} height={300} />
-        </>
+        <Box width={400} height={300} sx={{ placeContent: "center" }}>
+          <CircularProgress size={200} disableShrink />
+        </Box>
       )}
       {!isBeingSwapped && (
         <>
