@@ -1,6 +1,6 @@
 import { getPubSub } from "../pub-sub";
 import {
-  GetPostArgs,
+  GetPostsArgs,
   ReorderPostsArgs,
   UpdatePostArgs,
   getPosts,
@@ -12,7 +12,7 @@ const pubsub = getPubSub();
 
 export const postResolvers = {
   Query: {
-    getPosts: (parent: undefined, args: GetPostArgs) => getPosts(args),
+    getPosts: (parent: undefined, args: GetPostsArgs) => getPosts(args),
   },
   Subscription: {
     postsReordered: {

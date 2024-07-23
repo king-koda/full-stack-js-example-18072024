@@ -51,3 +51,4 @@ Server:
 - decided to continue using pubsub although it isn't recommended in production environments, due to this being a relatively small project, and it isn't expected to be used by many people at once very often
 - paginated application using apollo's recommended tools approach
 - decided to use Formik as MUI appeared to not have all the necessary components for building a form, Formik was a simple and effective solution with good extensibility if required
+- as the database is full of fake data, instead of mocking the data source and return values, the tests will just use data from the DB and get/save directly from/to it
