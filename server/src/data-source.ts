@@ -3,7 +3,7 @@ import { Post } from "./entity/Post";
 
 const AppDataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
+  host: process.env.POSTGRES_HOST,
   port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432,
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
@@ -13,6 +13,7 @@ const AppDataSource = new DataSource({
   entities: [Post],
   subscribers: [],
   migrations: [],
+  url: process.env.POSTGRES_URL,
 });
 
 /** Initializes the data source so that its ready to receive operations from the application */
