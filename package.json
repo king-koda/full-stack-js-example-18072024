@@ -4,7 +4,8 @@
   "description": "# Project overview An example application for managing posts. Built with:  - ReactJS - GraphQL - Apollo - NodeJS - PostgreSQL - TypeORM",
   "scripts": {
     "start": "npm run --prefix ./server start",
-    "install": "npm --prefix ./server i && npm --prefix ./client i"
+    "install": "npm --prefix ./server i && npm --prefix ./client i",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/king-koda/full-stack-js-example-18072024/issues"
   },
-  "homepage": "https://github.com/king-koda/full-stack-js-example-18072024#readme"
+  "homepage": "https://github.com/king-koda/full-stack-js-example-18072024#readme",
+  "devDependencies": {
+    "husky": "^9.1.1"
+  }
 }

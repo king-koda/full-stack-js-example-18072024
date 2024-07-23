@@ -1,0 +1,2 @@
+npm --prefix ./server i && npm --prefix ./client i
+npm --prefix ./server prune && npm --prefix ./client prune
