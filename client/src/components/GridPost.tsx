@@ -1,4 +1,4 @@
-import { QueryResult, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { Grid } from "@mui/material";
 import { Waypoint } from "react-waypoint";
 import { POST_LIMIT } from "../constants";
@@ -9,7 +9,6 @@ import { Post } from "./Post";
 type GridPostProps = {
   index: number;
   post: PostType;
-  refetch: QueryResult["refetch"];
   fetchMore: () => Promise<void>;
   totalPosts: number;
   dragStartId: number | null;
@@ -29,7 +28,6 @@ type GridPostProps = {
 export const GridPost = ({
   index,
   post,
-  refetch,
   fetchMore,
   totalPosts,
   dragStartId,
@@ -80,14 +78,6 @@ export const GridPost = ({
             secondPostId: post.id,
           },
         });
-
-        // refetch the exact amount of posts that are currently loaded, to eliminate jitter and smoothen out the drag and drop feature
-        await refetch({
-          cursor: 0,
-          limit: totalPosts,
-        });
-
-        setIsSwapping(null);
       }}
       draggable={true}
       id={"grid-item-" + post.id}
