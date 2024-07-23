@@ -11,6 +11,7 @@ export class Post {
   @Column({ type: "text" })
   content: string;
 
+  // the value for order will auto-increment on insertion of a new post
   @Column({ type: "int" })
   @Generated("increment")
   order: number;
