@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   CardContent,
   CardHeader,
@@ -36,12 +37,19 @@ export const Post = ({ id, title, content, createdAt }: PostProps) => {
           height: "20%",
           padding: 0,
           overflow: "clip",
+          textAlign: "start",
+          ml: 2,
         }}
         titleTypographyProps={{
           variant: "h5",
           fontWeight: "bold",
         }}
         title={title}
+        action={
+          <Button variant="contained" sx={{ margin: 2 }}>
+            Edit
+          </Button>
+        }
       />
       <Divider />
       <CardContent

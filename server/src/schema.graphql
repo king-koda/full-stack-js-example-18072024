@@ -12,7 +12,7 @@ type ReorderedPosts {
 }
 
 type Query {
-  getPosts: [Post]
+  getPosts(cursor: Int, limit: Int!): [Post]
 }
 
 type Mutation {

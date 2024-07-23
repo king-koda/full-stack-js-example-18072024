@@ -45,3 +45,4 @@ Server:
 - emitting the compiled JS files alongside the ts files or in their own dist folder felt unneccessary for the project, so noEmit was enabled in tsconfig.json
 - used React DnD for post drag and drop reordering, as its a popular and very functional library, which will help achieve the re-ordering by dragging posts around easily
 - chose Vite React over CRA for speed and minimalism, as its only a small project CRA might be overkill, used the create vite@latest command to get the groundwork done
+- using react-waypoint for handling the tracking of elements in the list to know when its time to refetch more posts to allow infinite scrolling, chose it because its a wrapper that is clean and simple to use

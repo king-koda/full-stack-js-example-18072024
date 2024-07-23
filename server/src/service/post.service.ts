@@ -2,14 +2,20 @@ import { getDataSource } from "../data-source";
 import { Post } from "../entity/Post";
 import { getPubSub } from "../pub-sub";
 
+export type GetPostArgs = {
+  cursor?: number;
+  limit: number;
+};
+
 /** Query for fetching all available posts */
 // TODO: add necessary code/args for pagination/ infinite scrolling
-export const getPosts = async () => {
+export const getPosts = async (args: GetPostArgs) => {
+  const { cursor, limit } = args;
   const dataSource = await getDataSource();
   // Fetch all posts in ascending order to allow their positions to be swapped and updated easily
   const posts = await dataSource
     .getRepository(Post)
-    .find({ order: { order: "ASC" } });
+    .find({ order: { order: "ASC" }, skip: cursor ?? 0, take: limit });
   console.info(`Fetched ${posts.length} posts.`);
   return posts;
 };
