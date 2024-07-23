@@ -1,9 +1,10 @@
 import { useMutation } from "@apollo/client";
 import { Grid } from "@mui/material";
+import { useState } from "react";
 import { Waypoint } from "react-waypoint";
 import { POST_LIMIT } from "../constants";
 import { PostType } from "../types";
-import { UPDATE_POST_ORDER } from "./graphql/post";
+import { REORDER_POSTS } from "./graphql/post";
 import { Post } from "./Post";
 
 type GridPostProps = {
@@ -35,7 +36,9 @@ export const GridPost = ({
   isSwapping,
   setIsSwapping,
 }: GridPostProps) => {
-  const [updatePostOrder] = useMutation(UPDATE_POST_ORDER);
+  const [reorderPosts] = useMutation(REORDER_POSTS);
+  // passing in isEditing to dynamically disable "draggable" prop while editing a post
+  const [isEditing, setIsEditing] = useState(false);
 
   return (
     <Grid
@@ -72,14 +75,14 @@ export const GridPost = ({
           secondPostId: post.id,
         });
 
-        await updatePostOrder({
+        await reorderPosts({
           variables: {
             firstPostId: dragStartId,
             secondPostId: post.id,
           },
         });
       }}
-      draggable={true}
+      draggable={!isEditing}
       id={"grid-item-" + post.id}
     >
       {/* set a waypoint at every POST_LIMIT/2 post */}
@@ -102,6 +105,8 @@ export const GridPost = ({
         content={post.content}
         createdAt={post.createdAt}
         isSwapping={isSwapping}
+        setIsEditing={setIsEditing}
+        isEditing={isEditing}
       />
     </Grid>
   );

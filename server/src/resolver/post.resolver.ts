@@ -1,11 +1,11 @@
 import { getPubSub } from "../pub-sub";
 import {
   GetPostArgs,
+  ReorderPostsArgs,
   UpdatePostArgs,
-  UpdatePostOrderArgs,
   getPosts,
+  reorderPosts,
   updatePost,
-  updatePostOrder,
 } from "../service/post.service";
 
 const pubsub = getPubSub();
@@ -18,11 +18,14 @@ export const postResolvers = {
     postsReordered: {
       subscribe: () => pubsub.asyncIterator(["POSTS_REORDERED"]),
     },
+    postUpdated: {
+      subscribe: () => pubsub.asyncIterator(["POST_UPDATED"]),
+    },
   },
   Mutation: {
     updatePost: (parent: undefined, args: UpdatePostArgs) => updatePost(args),
-    updatePostOrder: (parent: undefined, args: UpdatePostOrderArgs) =>
-      updatePostOrder(args),
+    reorderPosts: (parent: undefined, args: ReorderPostsArgs) =>
+      reorderPosts(args),
   },
 };
 

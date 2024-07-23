@@ -37,6 +37,7 @@ export type UpdatePostArgs = {
 export const updatePost = async (args: UpdatePostArgs) => {
   const { id, title, content } = args;
   const dataSource = await getDataSource();
+  const pubsub = getPubSub();
 
   try {
     let post = await dataSource
@@ -47,6 +48,8 @@ export const updatePost = async (args: UpdatePostArgs) => {
     post.content = content;
 
     post = await dataSource.getRepository(Post).save(post);
+    pubsub.publish("POST_UPDATED", { postUpdated: args });
+
     console.info(`Updated post with ID: ${post.id}.`);
     return post;
   } catch (error) {
@@ -55,7 +58,7 @@ export const updatePost = async (args: UpdatePostArgs) => {
   }
 };
 
-export type UpdatePostOrderArgs = {
+export type ReorderPostsArgs = {
   firstPostId: number;
   secondPostId: number;
 };
@@ -65,7 +68,7 @@ export type UpdatePostOrderArgs = {
  * @param secondPostId - The ID of the second post of the swap.
  * @returns True if successful.
  */
-export const updatePostOrder = async (args: UpdatePostOrderArgs) => {
+export const reorderPosts = async (args: ReorderPostsArgs) => {
   const { firstPostId, secondPostId } = args;
   const dataSource = await getDataSource();
   const pubsub = getPubSub();
@@ -84,6 +87,7 @@ export const updatePostOrder = async (args: UpdatePostOrderArgs) => {
 
     await dataSource.getRepository(Post).save([firstPostDB, secondPostDB]);
     pubsub.publish("POSTS_REORDERED", { postsReordered: args });
+
     console.info(
       `Swapped the ordering of posts of ID: ${firstPostId} and ${secondPostId}.`
     );

@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { POST_LIMIT } from "../constants";
 import { PostType } from "../types";
-import { GET_POSTS, POSTS_REORDERED } from "./graphql/post";
+import { GET_POSTS, POST_UPDATED, POSTS_REORDERED } from "./graphql/post";
 import { GridPost } from "./GridPost";
 
 export const Feed = () => {
@@ -20,6 +20,9 @@ export const Feed = () => {
 
   // the subscription we setup to listen for posts being reordered
   const { data: postsReordered } = useSubscription(POSTS_REORDERED);
+
+  // the subscription we setup to listen for posts being reordered
+  const { data: postUpdated } = useSubscription(POST_UPDATED);
 
   // const [posts, setPosts] = useState<PostType[]>([]);
   const [dragStartId, setDragStartId] = useState<number | null>(null);
@@ -49,23 +52,31 @@ export const Feed = () => {
     });
   };
 
+  const refetchData = async (onFinish?: () => void) => {
+    // refetch the exact amount of posts that are currently loaded, to eliminate jitter and smoothen out the drag and drop feature
+    await refetch({
+      cursor: 0,
+      limit: posts.length,
+    });
+
+    onFinish?.();
+  };
+
   // watches for when two posts are swapped, to then trigger the refetch and conclusion of the swap
   useEffect(() => {
     if (postsReordered?.postsReordered) {
-      const refetchData = async () => {
-        // refetch the exact amount of posts that are currently loaded, to eliminate jitter and smoothen out the drag and drop feature
-        await refetch({
-          cursor: 0,
-          limit: posts.length,
-        });
-        // await the refetch to complete first before setting isSwapping to null
-        // to prevent the loading spinner disappearing too early
-        setIsSwapping(null);
-      };
-
-      refetchData();
+      refetchData(() => setIsSwapping(null));
+      // await the refetch to complete first before setting isSwapping to null
+      // to prevent the loading spinner disappearing too early
     }
   }, [postsReordered?.postsReordered]);
+
+  // watches for when a post is updated, to then trigger the refetch
+  useEffect(() => {
+    if (postUpdated?.postUpdated) {
+      refetchData();
+    }
+  }, [postUpdated?.postUpdated]);
 
   return (
     <>

@@ -24,9 +24,9 @@ export const UPDATE_POST = gql`
   }
 `;
 
-export const UPDATE_POST_ORDER = gql`
-  mutation UpdatePostOrder($firstPostId: ID!, $secondPostId: ID!) {
-    updatePostOrder(firstPostId: $firstPostId, secondPostId: $secondPostId)
+export const REORDER_POSTS = gql`
+  mutation ReorderPosts($firstPostId: ID!, $secondPostId: ID!) {
+    reorderPosts(firstPostId: $firstPostId, secondPostId: $secondPostId)
   }
 `;
 
@@ -35,6 +35,16 @@ export const POSTS_REORDERED = gql`
     postsReordered {
       firstPostId
       secondPostId
+    }
+  }
+`;
+
+export const POST_UPDATED = gql`
+  subscription PostUpdated {
+    postUpdated {
+      id
+      title
+      content
     }
   }
 `;

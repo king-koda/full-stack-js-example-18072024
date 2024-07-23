@@ -37,6 +37,7 @@ Server:
 - that new posts created would appear at the start of the list of posts naturally
 - that the ordering of posts is persisted on the server side and visible on the client side
 - that the title of the post being clipped and prevented in overflowing isn't a huge issue to the user
+- that creating a post isn't a requirement for the user
 
 # Design Decisions
 
@@ -48,3 +49,4 @@ Server:
 - using react-waypoint for handling the tracking of elements in the list to know when its time to refetch more posts to allow infinite scrolling, chose it because its a wrapper that is clean and simple to use
 - decided to continue using pubsub although it isn't recommended in production environments, due to this being a relatively small project, and it isn't expected to be used by many people at once very often
 - paginated application using apollo's recommended tools approach
+- decided to use Formik as MUI appeared to not have all the necessary components for building a form, Formik was a simple and effective solution with good extensibility if required
