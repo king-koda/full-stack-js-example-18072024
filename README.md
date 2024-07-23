@@ -15,10 +15,11 @@ Built with:
 # Setup instructions
 
 1. Clone the repo
-2. Install project dependencies with "npm i" in root, client, and server directory
+2. Install project dependencies with "npm i" in root directory (installs client and server dependencies)
 3. Install Docker Desktop and make sure that it has WSL2 integration enabled if running the application in WSL
 4. Run "npm run db-setup" in the server directory
-5. Start project with "npm run start" (to be finalised)
+5. Run "npm run start" in the server directory in one terminal
+6. Run "npm run start" in the client directory in another terminal
 
 # Available scripts
 
