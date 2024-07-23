@@ -17,14 +17,19 @@ import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 
+const urlToUse =
+  !process.env.NODE_ENV || process.env.NODE_ENV === "development"
+    ? "localhost:4000/graphql"
+    : "";
+
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: "ws://localhost:4000/graphql",
+    url: `ws://${urlToUse}`,
   })
 );
 
 const httpLink = new HttpLink({
-  uri: "http://localhost:4000/graphql",
+  uri: `http://${urlToUse}`,
 });
 
 // The split function takes three parameters:

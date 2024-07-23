@@ -1,7 +1,6 @@
 import "reflect-metadata";
 import { initializeDataSource } from "./data-source";
 import { ApolloServer } from "@apollo/server";
-
 import resolvers from "./resolver/index";
 import express from "express";
 import cors from "cors";
@@ -12,6 +11,7 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 import { WebSocketServer } from "ws";
 import { useServer } from "graphql-ws/lib/use/ws";
 import typeDefs from "./typeDefs";
+import "dotenv/config";
 
 // ready the DB and data source object for use before starting the application
 await initializeDataSource();
