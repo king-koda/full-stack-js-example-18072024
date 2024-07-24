@@ -1,5 +1,8 @@
 # Full Stack JS Example
 
+# Application URL
+https://full-stack-js-example-18072024-client.vercel.app/
+
 # Project overview
 
 An example application for managing posts.
