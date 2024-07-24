@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker/locale/en_AU";
-import { getDataSource } from "../src/data-source";
-import { Post } from "../src/entity/Post";
+import { Post } from "../entity/Post.js";
+import { getDataSource } from "../data-source.js";
 
 const ds = await getDataSource();
 

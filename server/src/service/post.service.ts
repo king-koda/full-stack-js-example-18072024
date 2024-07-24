@@ -1,6 +1,6 @@
-import { getDataSource } from "../data-source";
-import { Post } from "../entity/Post";
-import { getPubSub } from "../pub-sub";
+import { getDataSource } from "../data-source.js";
+import { Post } from "../entity/Post.js";
+import { getPubSub } from "../pub-sub.js";
 
 export type GetPostsArgs = {
   cursor?: number;
