@@ -17,7 +17,10 @@ import bodyParser from "body-parser";
 config();
 
 // ready the DB and data source object for use before starting the application
-await initializeDataSource();
+async function initializeDS() {
+  await initializeDataSource();
+}
+initializeDS();
 
 // Create an Express app and HTTP server; we will attach both the WebSocket
 // server and the ApolloServer to this HTTP server.
@@ -60,7 +63,10 @@ const server = new ApolloServer({
   ],
 });
 
-await server.start();
+async function startServer() {
+  await server.start();
+}
+startServer();
 
 app.use(
   "/graphql",
