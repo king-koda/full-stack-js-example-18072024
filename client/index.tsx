@@ -22,9 +22,14 @@ const urlToUse =
     ? "localhost:4000/graphql"
     : "server-late-meadow-4919.fly.dev/graphql";
 
+const wsUrlToUse =
+  !process.env.NODE_ENV || process.env.NODE_ENV === "development"
+    ? "ws"
+    : "wss";
+
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: `ws://${urlToUse}`,
+    url: `${wsUrlToUse}://${urlToUse}`,
   })
 );
 
