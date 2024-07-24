@@ -20,6 +20,10 @@
 
     "outDir": "./dist",
     "rootDir": "./",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+
+    "strict": true,
+    "skipLibCheck": true,
+    "module": "ESNext"
   }
 }
