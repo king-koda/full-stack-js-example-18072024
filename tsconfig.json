@@ -6,7 +6,6 @@
   "compilerOptions": {
     "strict": true,
     "skipLibCheck": true,
-    "noEmit": true,
     "module": "ESNext"
   }
 }

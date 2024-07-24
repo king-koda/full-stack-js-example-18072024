@@ -18,7 +18,6 @@ const AppDataSource = new DataSource({
 });
 /** Initializes the data source so that its ready to receive operations from the application */
 export const initializeDataSource = async () => {
-    console.log(process.env);
     if (!AppDataSource.isInitialized) {
         try {
             await AppDataSource.initialize();

@@ -23,5 +23,13 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": [
+    "components",
+    "utils",
+    "App.tsx",
+    "constants.ts",
+    "index.tsx",
+    "types.ts",
+    "vite-env.d.ts"
+  ]
 }
