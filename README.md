@@ -18,16 +18,19 @@ Built with:
 2. Install project dependencies with "npm i" in root directory (installs client and server dependencies)
 3. Install Docker Desktop and make sure that it has WSL2 integration enabled if running the application in WSL
 4. Run "npm run db-setup" in the server directory
-5. Run "npm run start" in the server directory in one terminal
+5. Run "npm run dev" in the server directory in one terminal (to run in development mode)
 6. Run "npm run start" in the client directory in another terminal
+7. Visit localhost:5173, and use the application
 
 # Available scripts
 
 Server:
 
-- "npm run start" -> compiles TS files to JS and runs application with nodemon watching for changes to files and restarting server when required
+- "npm run dev" -> runs the server using the TS files only
 - "npm run db-setup" -> pulls the latest postgres image from docker site and initializes it with the config found @ server/docker-compose.yml, and then populates the db with some fake seed data
 - "npm run test" -> runs all the test files in the directory using vitest, and re-runs the tests on any new changes
+- "npm run build" -> builds the application from TS files into folder dist/
+- "npm run start" -> to be used within the dist folder after build, runs application as it would in prod
 
 # Assumptions
 
