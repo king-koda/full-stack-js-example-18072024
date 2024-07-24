@@ -1,7 +1,7 @@
 import "reflect-metadata";
-import { initializeDataSource } from "../data-source.js";
+import { initializeDataSource } from "./data-source.js";
 import { ApolloServer } from "@apollo/server";
-import resolvers from "../resolver/index.js";
+import resolvers from "./resolver/index.js";
 import express from "express";
 import cors from "cors";
 import { expressMiddleware } from "@apollo/server/express4";
@@ -10,7 +10,7 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import { WebSocketServer } from "ws";
 import { useServer } from "graphql-ws/lib/use/ws";
-import typeDefs from "../typeDefs.js";
+import typeDefs from "./typeDefs.js";
 import { config } from "dotenv";
 import bodyParser from "body-parser";
 config();
@@ -53,6 +53,9 @@ const server = new ApolloServer({
 });
 await server.start();
 app.use("/graphql", cors(), bodyParser.json(), expressMiddleware(server));
+app.use("/", (req, res) => {
+    console.log(`Server ready.`);
+});
 httpServer.listen({ port: 4000 }, () => {
-    console.log(`Server ready at http://localhost:4000/graphql`);
+    console.log(`Server ready at :4000/graphql`);
 });
