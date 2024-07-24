@@ -74,8 +74,8 @@ async function startServer() {
     console.log(`Server ready.`);
   });
 
-  httpServer.listen({ port: 4000 }, () => {
-    console.log(`Server ready at :4000/graphql`);
+  httpServer.listen({ port: parseInt(process.env.PORT ?? "4000") }, () => {
+    console.log(`Server ready at :${process.env.PORT ?? "4000"}/graphql`);
   });
 }
 
