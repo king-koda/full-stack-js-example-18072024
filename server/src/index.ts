@@ -12,6 +12,7 @@ import { WebSocketServer } from "ws";
 import { useServer } from "graphql-ws/lib/use/ws";
 import typeDefs from "./typeDefs.js";
 import { config } from "dotenv";
+import bodyParser from "body-parser";
 
 config();
 
@@ -63,7 +64,7 @@ await server.start();
 app.use(
   "/graphql",
   cors<cors.CorsRequest>(),
-  express.json(),
+  bodyParser.json(),
   expressMiddleware(server)
 );
 

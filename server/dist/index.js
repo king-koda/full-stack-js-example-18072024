@@ -12,6 +12,7 @@ import { WebSocketServer } from "ws";
 import { useServer } from "graphql-ws/lib/use/ws";
 import typeDefs from "./typeDefs.js";
 import { config } from "dotenv";
+import bodyParser from "body-parser";
 config();
 // ready the DB and data source object for use before starting the application
 await initializeDataSource();
@@ -51,7 +52,7 @@ const server = new ApolloServer({
     ],
 });
 await server.start();
-app.use("/graphql", cors(), express.json(), expressMiddleware(server));
+app.use("/graphql", cors(), bodyParser.json(), expressMiddleware(server));
 httpServer.listen({ port: 4000 }, () => {
     console.log(`Server ready at http://localhost:4000/graphql`);
 });
