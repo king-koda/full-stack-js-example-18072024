@@ -20,7 +20,7 @@ import App from "./App";
 const urlToUse =
   !process.env.NODE_ENV || process.env.NODE_ENV === "development"
     ? "localhost:4000/graphql"
-    : "";
+    : "https://server-late-meadow-4919.fly.dev/graphql";
 
 const wsLink = new GraphQLWsLink(
   createClient({
