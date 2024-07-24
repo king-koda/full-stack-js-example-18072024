@@ -13,6 +13,7 @@ import { useServer } from "graphql-ws/lib/use/ws";
 import typeDefs from "./typeDefs.js";
 import { config } from "dotenv";
 import bodyParser from "body-parser";
+import { seedData } from "./utils/seed-data.js";
 
 config();
 
@@ -20,6 +21,7 @@ config();
 async function startServer() {
   await initializeDataSource();
 
+  await seedData();
   // Create an Express app and HTTP server; we will attach both the WebSocket
   // server and the ApolloServer to this HTTP server.
   const app = express();
