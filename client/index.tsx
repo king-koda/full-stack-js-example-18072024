@@ -20,7 +20,7 @@ import App from "./App";
 const urlToUse =
   !process.env.NODE_ENV || process.env.NODE_ENV === "development"
     ? "localhost:4000/graphql"
-    : "https://server-late-meadow-4919.fly.dev/graphql";
+    : "server-late-meadow-4919.fly.dev/graphql";
 
 const wsLink = new GraphQLWsLink(
   createClient({
@@ -28,8 +28,13 @@ const wsLink = new GraphQLWsLink(
   })
 );
 
+const httpUrlToUse =
+  !process.env.NODE_ENV || process.env.NODE_ENV === "development"
+    ? "http"
+    : "https";
+
 const httpLink = new HttpLink({
-  uri: `http://${urlToUse}`,
+  uri: `${httpUrlToUse}://${urlToUse}`,
 });
 
 // The split function takes three parameters:
