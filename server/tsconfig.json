@@ -21,6 +21,5 @@
     "outDir": "./dist",
     "rootDir": "./",
     "resolveJsonModule": true
-  },
-  "include": ["src/"]
+  }
 }

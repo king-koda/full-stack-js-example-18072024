@@ -2,14 +2,14 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Server side of the full stack js example",
-  "main": "src/index.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "NODE_ENV=development concurrently \"tsc -w\" \"npx tsx src/index.ts\"",
-    "start": "NODE_ENV=prod && node src/index.js",
-    "db-setup": "docker-compose up -d && npx tsx test/seed-data.ts",
+    "dev": "concurrently \"tsc -w\" \"npx tsx index.ts\"",
+    "start": "node index.js",
+    "db-setup": "docker-compose up -d && npx tsx utils/seed-data.ts",
     "test": "vitest",
-    "build": "rm -rf dist/ && tsc && cp .env dist/.env && cp src/schema.graphql dist/src/schema.graphql && cp src/vercel.json dist/src/vercel.json && cp package.json dist/package.json && cp package-lock.json dist/package-lock.json"
+    "build": "rm -rf dist/ && tsc && cp .env dist/.env && cp schema.graphql dist/schema.graphql && cp vercel.json dist/vercel.json && cp package.json dist/package.json && cp package-lock.json dist/package-lock.json"
   },
   "repository": {
     "type": "git",
