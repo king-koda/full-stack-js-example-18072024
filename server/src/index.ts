@@ -1,7 +1,7 @@
 import "reflect-metadata";
-import { initializeDataSource } from "./data-source";
+import { initializeDataSource } from "./data-source.js";
 import { ApolloServer } from "@apollo/server";
-import resolvers from "./resolver/index";
+import resolvers from "./resolver/index.js";
 import express from "express";
 import cors from "cors";
 import { expressMiddleware } from "@apollo/server/express4";
@@ -10,8 +10,10 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import { WebSocketServer } from "ws";
 import { useServer } from "graphql-ws/lib/use/ws";
-import typeDefs from "./typeDefs";
-import "dotenv/config";
+import typeDefs from "./typeDefs.js";
+import { config } from "dotenv";
+
+config();
 
 // ready the DB and data source object for use before starting the application
 await initializeDataSource();

@@ -1,4 +1,4 @@
-import { getPubSub } from "../pub-sub";
+import { getPubSub } from "../pub-sub.js";
 import {
   GetPostsArgs,
   ReorderPostsArgs,
@@ -6,7 +6,7 @@ import {
   getPosts,
   reorderPosts,
   updatePost,
-} from "../service/post.service";
+} from "../service/post.service.js";
 
 const pubsub = getPubSub();
 

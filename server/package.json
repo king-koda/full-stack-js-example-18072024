@@ -5,9 +5,11 @@
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "start": "concurrently \"tsc -w\" \"npx tsx src/index.ts\"",
+    "start": "NODE_ENV=development concurrently \"tsc -w\" \"npx tsx src/index.ts\"",
+    "start-prod": "NODE_PATH=./dist NODE_ENV=prod && node dist/index.js",
     "db-setup": "docker-compose up -d && npx tsx test/seed-data.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "build": "rm -rf dist/ && tsc && cp src/schema.graphql dist/schema.graphql"
   },
   "repository": {
     "type": "git",
