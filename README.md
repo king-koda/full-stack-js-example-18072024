@@ -30,8 +30,13 @@ Server:
 - "npm run db-setup" -> pulls the latest postgres image from docker site and initializes it with the config found @ server/docker-compose.yml, and then populates the db with some fake seed data
 - "npm run test" -> runs all the test files in the directory using vitest, and re-runs the tests on any new changes
 - "npm run build" -> builds the application from TS files into folder dist/
-- "npm run start" -> to be used within the dist folder after build, runs application as it would in prod
+- "npm run start" -> to be used after build, runs application as it would in prod
 
+Client:
+
+- "npm run start" -> runs the FE application and auto compiles at the same time to dist/
+- "npm run build" -> builds the application from TS files into folder dist/ with its assets
+- 
 # Assumptions
 
 - that the user has Docker Desktop, docker installed, or can install docker
